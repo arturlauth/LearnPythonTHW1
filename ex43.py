@@ -10,6 +10,7 @@ class Scene(object):
         print("Subclass it and implement enter().")
         exit(1)
 
+
 class Engine(object):
 
     def __init__(self, scene_map):
@@ -25,6 +26,7 @@ class Engine(object):
 
         current_scene.enter()
 
+
 class Death(Scene):
 
     quips = [
@@ -38,6 +40,7 @@ class Death(Scene):
     def enter(self):
         print(Death.quips[randint(0, len(self.quips)-1)])
         exit(1)
+
 
 class CentralCorridor(Scene):
 
@@ -118,6 +121,7 @@ class CentralCorridor(Scene):
             print("DOES NOT COMPUTE!")
             return 'central_corridor'
 
+
 class LaserWeaponArmory(Scene):
 
     def enter(self):
@@ -139,12 +143,12 @@ class LaserWeaponArmory(Scene):
         code is 3 digits.
         """))
 
-        code = f"{radint(1,9)}{radint(1,9)}{radint(1,9)}"
+        code = f"{randint(1,9)}{randint(1,9)}{randint(1,9)}"
         guess = input("[keypad]> ")
         guesses = 0
 
         while guess != code and guesses < 10:
-            print ("BZZZED!")
+            print("BZZZED!")
             guesses += 1
             guess = input("[keypad]> ")
 
@@ -233,6 +237,7 @@ class TheBridge(Scene):
             print("DOES NOT COMPUTE!")
             return "the_bridge"
 
+
 class EscapePod(Scene):
 
     def enter(self):
@@ -252,7 +257,7 @@ class EscapePod(Scene):
             There's 5 pods, which one do you take?
         """))
 
-        good_pod = radint(1,5)
+        good_pod = randint(1, 5)
         guess = input("[pod #]> ")
 
         if int(guess) != good_pod:
@@ -282,21 +287,23 @@ class EscapePod(Scene):
             """))
             return 'finished'
 
+
 class Finished(Scene):
 
     def enter(self):
         print("You won! Good job.")
         return 'finished'
 
+
 class Map(object):
 
     scenes = {
-    'central_corridor': CentralCorridor(),
-    'laser_weapon_armory': LaserWeaponArmory(),
-    'the_bridge': TheBridge(),
-    'escape_pod': EscapePod(),
-    'death': Death(),
-    'finished': Finished(),
+        'central_corridor': CentralCorridor(),
+        'laser_weapon_armory': LaserWeaponArmory(),
+        'the_bridge': TheBridge(),
+        'escape_pod': EscapePod(),
+        'death': Death(),
+        'finished': Finished(),
     }
 
     def __init__(self, start_scene):
@@ -308,6 +315,7 @@ class Map(object):
 
     def opening_scene(self):
         return self.next_scene(self.start_scene)
+
 
 if __name__ == '__main__':
     a_map = Map('central_corridor')

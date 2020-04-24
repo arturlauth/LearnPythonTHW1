@@ -9,9 +9,11 @@ def scan(pos):
     """
     result = pos.split()
     list = []
-    i = 0
     for word in result:
-        pos1 = ('direction', word)
-        list.append(pos1)
-        i += 1
+        if word == 'north' or word == 'east' or word == 'south':
+            pos1 = ('direction', word)
+            list.append(pos1)
+        else:
+            pos1 = ('verb', word)
+            list.append(pos1)
     return list
